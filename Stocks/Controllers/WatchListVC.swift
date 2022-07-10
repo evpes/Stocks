@@ -79,7 +79,11 @@ extension WatchListVC: UISearchResultsUpdating {
 extension WatchListVC: SearchResultsVCDelegate {
     func searchResultsVCDidSelect(searchResult: SearchResult) {
         //Present stock details for given selection
-        print("Did select \(searchResult.displaySymbol)")
+        navigationItem.searchController?.searchBar.resignFirstResponder()
+        let vc = StockDetailsVC()
+        let navVC = UINavigationController(rootViewController: vc)
+        vc.title = searchResult.description
+        present(navVC, animated: true)
     }
 }
 
