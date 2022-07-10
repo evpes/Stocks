@@ -8,6 +8,8 @@
 import UIKit
 
 class WatchListVC: UIViewController {
+    
+    private var searchTimer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class WatchListVC: UIViewController {
     
     private func setUpSearchController() {
         let resultVC = SearchResultsVC()
+        resultVC.delegate = self
         let searchVC = UISearchController(searchResultsController: resultVC)
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
@@ -51,13 +54,32 @@ extension WatchListVC: UISearchResultsUpdating {
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
+        // Reset timer
+        
+        searchTimer?.invalidate()
+        
+        // Kick off new timer
         // Optimize to reduce number of searches
         
-        // Call API Search
-        
-        // Update results controller
-        
-        print(query)
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { _ in
+            APICaller.shared.search(query: query) { result in
+                switch result {
+                case .success(let response):
+                    DispatchQueue.main.async { resultsVC.update(with: response.result) }
+                case .failure(let error):
+                    DispatchQueue.main.async { resultsVC.update(with: []) }
+                    print(error.localizedDescription)
+                }
+            }
+        })
+                                        
+    }
+}
+
+extension WatchListVC: SearchResultsVCDelegate {
+    func searchResultsVCDidSelect(searchResult: SearchResult) {
+        //Present stock details for given selection
+        print("Did select \(searchResult.displaySymbol)")
     }
 }
 

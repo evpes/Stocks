@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		12C2056C287ACF8F00E08836 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C2056B287ACF8F00E08836 /* Extensions.swift */; };
+		12C2056E287ADAE000E08836 /* SearchResultsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C2056D287ADAE000E08836 /* SearchResultsCell.swift */; };
+		12C20570287AF85A00E08836 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C2056F287AF85A00E08836 /* SearchResponse.swift */; };
 		12CC391528794F480093A4DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC391428794F480093A4DB /* AppDelegate.swift */; };
 		12CC391728794F480093A4DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC391628794F480093A4DB /* SceneDelegate.swift */; };
 		12CC391928794F480093A4DB /* WatchListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC391828794F480093A4DB /* WatchListVC.swift */; };
 		12CC391E28794F4B0093A4DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12CC391D28794F4B0093A4DB /* Assets.xcassets */; };
 		12CC392128794F4B0093A4DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12CC391F28794F4B0093A4DB /* LaunchScreen.storyboard */; };
-		12CC392F2879510D0093A4DB /* TopStoriesVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC392E2879510D0093A4DB /* TopStoriesVCViewController.swift */; };
+		12CC392F2879510D0093A4DB /* TopStoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC392E2879510D0093A4DB /* TopStoriesVC.swift */; };
 		12CC3931287951240093A4DB /* SearchResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC3930287951240093A4DB /* SearchResultsVC.swift */; };
 		12CC3933287951370093A4DB /* StockDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC3932287951370093A4DB /* StockDetailsVC.swift */; };
 		12CC3935287954590093A4DB /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC3934287954590093A4DB /* APICaller.swift */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		12C2056B287ACF8F00E08836 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		12C2056D287ADAE000E08836 /* SearchResultsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsCell.swift; sourceTree = "<group>"; };
+		12C2056F287AF85A00E08836 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		12CC391128794F480093A4DB /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC391428794F480093A4DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12CC391628794F480093A4DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,7 +34,7 @@
 		12CC391D28794F4B0093A4DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12CC392028794F4B0093A4DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12CC392228794F4B0093A4DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12CC392E2879510D0093A4DB /* TopStoriesVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesVCViewController.swift; sourceTree = "<group>"; };
+		12CC392E2879510D0093A4DB /* TopStoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesVC.swift; sourceTree = "<group>"; };
 		12CC3930287951240093A4DB /* SearchResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsVC.swift; sourceTree = "<group>"; };
 		12CC3932287951370093A4DB /* StockDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailsVC.swift; sourceTree = "<group>"; };
 		12CC3934287954590093A4DB /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 		12CC392828794FD10093A4DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				12C2056F287AF85A00E08836 /* SearchResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -89,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				12CC391F28794F4B0093A4DB /* LaunchScreen.storyboard */,
+				12C2056D287ADAE000E08836 /* SearchResultsCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -97,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				12CC391828794F480093A4DB /* WatchListVC.swift */,
-				12CC392E2879510D0093A4DB /* TopStoriesVCViewController.swift */,
+				12CC392E2879510D0093A4DB /* TopStoriesVC.swift */,
 				12CC3930287951240093A4DB /* SearchResultsVC.swift */,
 				12CC3932287951370093A4DB /* StockDetailsVC.swift */,
 			);
@@ -197,12 +203,14 @@
 			files = (
 				12CC39392879547C0093A4DB /* HapticsManager.swift in Sources */,
 				12CC3933287951370093A4DB /* StockDetailsVC.swift in Sources */,
+				12C2056E287ADAE000E08836 /* SearchResultsCell.swift in Sources */,
 				12CC391928794F480093A4DB /* WatchListVC.swift in Sources */,
 				12CC391528794F480093A4DB /* AppDelegate.swift in Sources */,
 				12CC3935287954590093A4DB /* APICaller.swift in Sources */,
 				12C2056C287ACF8F00E08836 /* Extensions.swift in Sources */,
 				12CC3931287951240093A4DB /* SearchResultsVC.swift in Sources */,
-				12CC392F2879510D0093A4DB /* TopStoriesVCViewController.swift in Sources */,
+				12C20570287AF85A00E08836 /* SearchResponse.swift in Sources */,
+				12CC392F2879510D0093A4DB /* TopStoriesVC.swift in Sources */,
 				12CC391728794F480093A4DB /* SceneDelegate.swift in Sources */,
 				12CC39372879546B0093A4DB /* PersistenceManager.swift in Sources */,
 			);

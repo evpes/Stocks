@@ -1,5 +1,5 @@
 //
-//  TopStoriesVCViewController.swift
+//  TopStoriesVC.swift
 //  Stocks
 //
 //  Created by evpes on 09.07.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TopStoriesVCViewController: UIViewController {
+class TopStoriesVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
