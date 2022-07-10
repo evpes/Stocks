@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12C2056C287ACF8F00E08836 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C2056B287ACF8F00E08836 /* Extensions.swift */; };
 		12CC391528794F480093A4DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC391428794F480093A4DB /* AppDelegate.swift */; };
 		12CC391728794F480093A4DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC391628794F480093A4DB /* SceneDelegate.swift */; };
 		12CC391928794F480093A4DB /* WatchListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CC391828794F480093A4DB /* WatchListVC.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12C2056B287ACF8F00E08836 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		12CC391128794F480093A4DB /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12CC391428794F480093A4DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12CC391628794F480093A4DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				12CC391428794F480093A4DB /* AppDelegate.swift */,
 				12CC391628794F480093A4DB /* SceneDelegate.swift */,
 				12CC391D28794F4B0093A4DB /* Assets.xcassets */,
+				12C2056B287ACF8F00E08836 /* Extensions.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				12CC391928794F480093A4DB /* WatchListVC.swift in Sources */,
 				12CC391528794F480093A4DB /* AppDelegate.swift in Sources */,
 				12CC3935287954590093A4DB /* APICaller.swift in Sources */,
+				12C2056C287ACF8F00E08836 /* Extensions.swift in Sources */,
 				12CC3931287951240093A4DB /* SearchResultsVC.swift in Sources */,
 				12CC392F2879510D0093A4DB /* TopStoriesVCViewController.swift in Sources */,
 				12CC391728794F480093A4DB /* SceneDelegate.swift in Sources */,
