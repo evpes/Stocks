@@ -13,9 +13,11 @@ class NewsVC: UIViewController {
         let table = UITableView()
         table.backgroundColor = .clear
         //Register cell, table
-                
+        table.register(NewsHeaderView.self, forHeaderFooterViewReuseIdentifier: NewsHeaderView.identifier)
         return table
     }()
+    
+    private var stories = [String]()
     
     private let type: NewsType
     
@@ -91,7 +93,10 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: NewsHeaderView.identifier) as? NewsHeaderView else { return  nil }
+        header.configure(with: .init(title: self.type.title, shouldShowAddButton: false))
+        return header
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
