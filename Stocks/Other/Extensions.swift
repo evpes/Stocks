@@ -17,6 +17,42 @@ extension DateFormatter {
         formatter.dateFormat = "YYYY-MM-dd"
         return formatter
     }()
+    
+    static let prettyDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
+    }()
+}
+
+// MARK: - String
+
+extension String {
+    static func string(from timeInterval: TimeInterval) -> String {
+        let date = Date(timeIntervalSince1970: timeInterval)
+        return DateFormatter.prettyDateFormatter.string(from: date)
+    }
+}
+
+extension UIImageView {
+    func setImage(with url: URL?) {
+        guard let url = url else {
+            return
+        }
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            let task = URLSession.shared.dataTask(with: url) { [weak self] data, resp, err in
+                guard let data = data, err == nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self?.image = UIImage(data: data)
+                }
+            }
+            task.resume()
+        }
+        
+    }
 }
 
 // MARK: - Add Subview
