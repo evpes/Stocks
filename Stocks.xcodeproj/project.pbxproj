@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1234908A287EB31400A11644 /* MarketDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12349089287EB31400A11644 /* MarketDataResponse.swift */; };
 		12672032287C160800C4DE8A /* NewsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12672031287C160800C4DE8A /* NewsHeaderView.swift */; };
 		12672034287C416200C4DE8A /* NewsStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12672033287C416200C4DE8A /* NewsStory.swift */; };
 		12672036287D71AC00C4DE8A /* NewsStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12672035287D71AC00C4DE8A /* NewsStoryCell.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12349089287EB31400A11644 /* MarketDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataResponse.swift; sourceTree = "<group>"; };
 		12672031287C160800C4DE8A /* NewsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsHeaderView.swift; sourceTree = "<group>"; };
 		12672033287C416200C4DE8A /* NewsStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStory.swift; sourceTree = "<group>"; };
 		12672035287D71AC00C4DE8A /* NewsStoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsStoryCell.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				12C2056F287AF85A00E08836 /* SearchResponse.swift */,
 				12672033287C416200C4DE8A /* NewsStory.swift */,
+				12349089287EB31400A11644 /* MarketDataResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1234908A287EB31400A11644 /* MarketDataResponse.swift in Sources */,
 				12CC39392879547C0093A4DB /* HapticsManager.swift in Sources */,
 				12CC3933287951370093A4DB /* StockDetailsVC.swift in Sources */,
 				12672032287C160800C4DE8A /* NewsHeaderView.swift in Sources */,

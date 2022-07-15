@@ -32,10 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func debug() {
-        APICaller.shared.news(for: .company(symbol: "MSFT")) { res in
+        APICaller.shared.marketData(for: "GOOG") { res in
             switch res {
-            case .success(let news):
-                print(news.count)
+            case .success(let resp):
+                print(resp.candleSticks[0])
             case .failure(let error):
                 print(error)
             }
