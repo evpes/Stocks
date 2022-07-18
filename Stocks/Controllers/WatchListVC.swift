@@ -92,7 +92,7 @@ class WatchListVC: UIViewController {
     
     private func createViewModels() {
         var viewModels = [WatchListCell.ViewModel]()
-        
+        print("create view models \(watchlistMap)")
         for (symbol, candleSticks) in watchlistMap {
             let changePercentage = getChangePercentage(for: candleSticks)
             viewModels.append(.init(symbol: symbol,
@@ -253,6 +253,7 @@ extension WatchListVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             tableView.beginUpdates()
             PersistenceManager.shared.removeFromWatchlist(symbol: viewModels[indexPath.row].symbol)
+            watchlistMap[viewModels[indexPath.row].symbol] = nil
             viewModels.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
