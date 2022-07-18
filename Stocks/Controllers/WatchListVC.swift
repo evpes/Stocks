@@ -32,6 +32,10 @@ class WatchListVC: UIViewController {
         return tableView
     }()
     
+    private var observer: NSObjectProtocol?
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -40,6 +44,7 @@ class WatchListVC: UIViewController {
         setUpSearchController()
         setUpTitleView()
         setUpFloatingPanel()
+        setUpObserver()
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,12 +54,19 @@ class WatchListVC: UIViewController {
     
     //MARK: - Private
     
+    private func setUpObserver() {
+        observer = NotificationCenter.default.addObserver(forName: .didAddToWatchList, object: nil, queue: .main, using: { [weak self] _ in
+            self?.viewModels.removeAll()
+            self?.fetchWatchlistData()
+        })
+    }
+    
     private func fetchWatchlistData() {
         let symbols = PersistenceManager.shared.watchlist
         
         let group = DispatchGroup()
         
-        for symbol in symbols {
+        for symbol in symbols where watchlistMap[symbol] == nil {
             group.enter()
             
             APICaller.shared.marketData(for: symbol) { [weak self] result in
@@ -196,7 +208,7 @@ extension WatchListVC: SearchResultsVCDelegate {
     func searchResultsVCDidSelect(searchResult: SearchResult) {
         //Present stock details for given selection
         navigationItem.searchController?.searchBar.resignFirstResponder()
-        let vc = StockDetailsVC()
+        let vc = StockDetailsVC(symbol: searchResult.symbol, companyName: searchResult.description)
         let navVC = UINavigationController(rootViewController: vc)
         vc.title = searchResult.description
         present(navVC, animated: true)
@@ -229,9 +241,30 @@ extension WatchListVC: UITableViewDelegate, UITableViewDataSource {
         return WatchListCell.preferredHeight
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            PersistenceManager.shared.removeFromWatchlist(symbol: viewModels[indexPath.row].symbol)
+            viewModels.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // Open details for selection
+        let viewModel = viewModels[indexPath.row]
+        let vc = StockDetailsVC(symbol: viewModel.symbol, companyName: viewModel.companyName, candleStickData: watchlistMap[viewModel.symbol] ?? [])
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
     }
     
 }
