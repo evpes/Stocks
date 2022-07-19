@@ -63,12 +63,36 @@ class StockDetailsVC: UIViewController {
     }
     
     private func fetchFinancialData() {
+        let group = DispatchGroup()
+        if candleStickData.isEmpty {
+            group.enter()
+        }
         
-        renderChart()
+        group.enter()
+        APICaller.shared.financialMetrics(for: symbol) { result in
+            defer {
+                group.leave()
+            }
+            switch result {
+            case .success(let response):
+                let metrics = response.metric
+                print(metrics)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            print("\n\nrender chart 1\n\n")
+            self?.renderChart()
+        }
+        
     }
     
     private func renderChart() {
-        
+        print("\n\nrender chart 2\n\n")
+        let headerView = StockDetailHeaderView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
+        tableView.tableHeaderView = headerView
     }
     
     private func fetchNews() {
