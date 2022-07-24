@@ -24,6 +24,8 @@ class StockDetailsVC: UIViewController {
     
     private var stories: [NewsStory] = []
     
+    private var metrics: Metrics?
+    
     // MARK: - Init
     
     init(symbol: String, companyName: String, candleStickData: [CandleStick] = []) {
@@ -69,14 +71,14 @@ class StockDetailsVC: UIViewController {
         }
         
         group.enter()
-        APICaller.shared.financialMetrics(for: symbol) { result in
+        APICaller.shared.financialMetrics(for: symbol) { [weak self] result in
             defer {
                 group.leave()
             }
             switch result {
             case .success(let response):
                 let metrics = response.metric
-                print(metrics)
+                self?.metrics = metrics
             case .failure(let error):
                 print(error)
             }
@@ -92,6 +94,15 @@ class StockDetailsVC: UIViewController {
     private func renderChart() {
         print("\n\nrender chart 2\n\n")
         let headerView = StockDetailHeaderView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
+        var viewModels = [MetricCell.ViewModel]()
+        if let metrics = metrics {
+            viewModels.append(.init(name: "52W High", value: "\(metrics.annualWeekHigh)"))
+            viewModels.append(.init(name: "52W Low", value: "\(metrics.annualWeekLow)"))
+            viewModels.append(.init(name: "52W Return", value: "\(metrics.annualWeekPriceReturnDaily)"))
+            viewModels.append(.init(name: "Beta", value: "\(metrics.beta)"))
+            viewModels.append(.init(name: "10D Vol.", value: "\(metrics.tenDayAverageTradingVolume)"))
+        }
+        headerView.configure(chartViewModel: .init(data: [], showLegend: false, showAxis: false), metricViewModels: viewModels)
         tableView.tableHeaderView = headerView
     }
     
