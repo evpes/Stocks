@@ -68,6 +68,18 @@ class StockDetailsVC: UIViewController {
         let group = DispatchGroup()
         if candleStickData.isEmpty {
             group.enter()
+            APICaller.shared.marketData(for: symbol) { [weak self] result in
+                defer {
+                    group.leave()
+                }
+                
+                switch result {
+                case .success(let response):
+                    self?.candleStickData = response.candleSticks
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
         
         group.enter()
@@ -102,8 +114,21 @@ class StockDetailsVC: UIViewController {
             viewModels.append(.init(name: "Beta", value: "\(metrics.beta)"))
             viewModels.append(.init(name: "10D Vol.", value: "\(metrics.tenDayAverageTradingVolume)"))
         }
-        headerView.configure(chartViewModel: .init(data: [], showLegend: false, showAxis: false), metricViewModels: viewModels)
+        let change = getChangePercentage(for: candleStickData)
+        headerView.configure(chartViewModel: .init(data: candleStickData.reversed().map { $0.close}, showLegend: false, showAxis: true, fillColor: change < 0 ? .systemRed : .systemGreen), metricViewModels: viewModels)
         tableView.tableHeaderView = headerView
+    }
+    
+    private func getChangePercentage(for data: [CandleStick]) -> Double {
+        let latestDate = data[0].date
+        
+        guard let latestClose = data.first?.close,
+              let priorClose = data.first(where: { !Calendar.current.isDate($0.date, inSameDayAs: latestDate)})?.close
+        else {
+            return 0
+        }
+        
+        return (latestClose/priorClose - 1)
     }
     
     private func fetchNews() {

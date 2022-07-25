@@ -39,7 +39,7 @@ class WatchListCell: UITableViewCell {
         return label
     }()
     
-     
+    
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
@@ -58,7 +58,8 @@ class WatchListCell: UITableViewCell {
     }()
     
     private let miniChartView:  StockChartView = {
-       let view = StockChartView()
+        let view = StockChartView()
+        view.isUserInteractionEnabled = false
         view.clipsToBounds = true
         return view
     }()
@@ -119,6 +120,7 @@ class WatchListCell: UITableViewCell {
         changeLabel.text = viewModel.changePercentage
         changeLabel.backgroundColor = viewModel.changeColor
         // ConfigureChartView
+        miniChartView.configure(with: viewModel.chartViewModel)
     }
     
     
