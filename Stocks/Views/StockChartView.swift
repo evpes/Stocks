@@ -8,8 +8,10 @@
 import Charts
 import UIKit
 
+/// View to show a chart
 class StockChartView: UIView {
-
+    
+    /// Chart view viewModel
     struct ViewModel {
         let data: [Double]
         let showLegend: Bool
@@ -17,6 +19,7 @@ class StockChartView: UIView {
         let fillColor: UIColor
     }
     
+    /// Chart view
     private let chartView: LineChartView = {
         let chartView = LineChartView()
         chartView.pinchZoomEnabled = false
@@ -45,12 +48,13 @@ class StockChartView: UIView {
         chartView.frame = bounds
     }
     
-    // reset chart view
-    
+    /// reset chart view
     func reset() {
         chartView.data = nil
     }
     
+    /// Configure view
+    /// - Parameter viewModel: View ViewModel
     func configure(with viewModel: ViewModel) {
         var entries = [ChartDataEntry]()
         for (index, value) in viewModel.data.enumerated() {

@@ -8,13 +8,18 @@
 import UIKit
 import SafariServices
 
-class StockDetailsVC: UIViewController {
+/// VC to show stock details
+final class StockDetailsVC: UIViewController {
     // MARK: - Props
     
+    /// Stock symbol
     private let symbol: String
+    /// Company name
     private let companyName: String
+    /// Collection of data
     private var candleStickData: [CandleStick]
     
+    /// Primary view
     private let tableView: UITableView = {
        let table = UITableView()
         table.register(NewsHeaderView.self, forHeaderFooterViewReuseIdentifier: NewsHeaderView.identifier)
@@ -22,8 +27,10 @@ class StockDetailsVC: UIViewController {
         return table
     }()
     
+    /// Collection of news stories
     private var stories: [NewsStory] = []
     
+    /// Company metrics
     private var metrics: Metrics?
     
     // MARK: - Init
@@ -57,6 +64,9 @@ class StockDetailsVC: UIViewController {
         tableView.frame = view.bounds
     }
     
+    // MARK: - Private
+    
+    /// Sets up tableView
     private func setUpTable() {
         view.addSubviews(tableView)
         tableView.delegate = self
@@ -64,6 +74,7 @@ class StockDetailsVC: UIViewController {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100) )
     }
     
+    /// Fetch financial metrics
     private func fetchFinancialData() {
         let group = DispatchGroup()
         if candleStickData.isEmpty {
@@ -103,6 +114,7 @@ class StockDetailsVC: UIViewController {
         
     }
     
+    /// Render chart and metrics
     private func renderChart() {
         print("\n\nrender chart 2\n\n")
         let headerView = StockDetailHeaderView(frame: CGRect(x: 0, y: 0, width: view.width, height: (view.width * 0.7) + 100))
@@ -119,6 +131,9 @@ class StockDetailsVC: UIViewController {
         tableView.tableHeaderView = headerView
     }
     
+    /// Get change percentage
+    /// - Parameter data: Symbol of company
+    /// - Returns: Collection of data
     private func getChangePercentage(for data: [CandleStick]) -> Double {
         let latestDate = data[0].date
         
@@ -131,6 +146,7 @@ class StockDetailsVC: UIViewController {
         return (latestClose/priorClose - 1)
     }
     
+    /// Fetch news for current company
     private func fetchNews() {
         APICaller.shared.news(for: .company(symbol: symbol)) { [weak self] res in
             switch res {
@@ -145,16 +161,20 @@ class StockDetailsVC: UIViewController {
         }
     }
     
+    /// Sets up close button
     private func setUpCloseButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
     }
     
+    /// Handle close button tap
     @objc private func didTapClose() {
         dismiss(animated: true)
     }
         
 
 }
+
+// MARK: - TableView
 
 extension StockDetailsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -194,6 +214,8 @@ extension StockDetailsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+// MARK: - NewsHeaderViewDelegate
 
 extension StockDetailsVC: NewsHeaderViewDelegate {
     func newsHeaderViewDidTapButton(_ headerView: NewsHeaderView) {

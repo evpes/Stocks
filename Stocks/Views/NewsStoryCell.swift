@@ -7,12 +7,16 @@
 
 import UIKit
 
+/// News story tableView cell
 class NewsStoryCell: UITableViewCell {
     
+    /// Cell id
     static let identifier = "NewsStoryCell"
     
+    /// Ideal height fo cell
     static let preferredHeight: CGFloat = 140
     
+    /// Cell viewModel
     struct ViewModel {
         let source: String
         let headline: String
@@ -27,14 +31,14 @@ class NewsStoryCell: UITableViewCell {
         }
     }
     
-    // Source
+    /// Source
     private let sourceLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
-    // Headline
+    /// Headline
     private let headlineLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .regular)
@@ -42,7 +46,7 @@ class NewsStoryCell: UITableViewCell {
         return label
     }()
     
-    // Date
+    /// Date
     private let dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
@@ -50,7 +54,7 @@ class NewsStoryCell: UITableViewCell {
         return label
     }()
     
-    // Image
+    /// Image for story
     private let storyImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .tertiarySystemBackground
@@ -60,6 +64,8 @@ class NewsStoryCell: UITableViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
+    
+    // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -118,6 +124,8 @@ class NewsStoryCell: UITableViewCell {
         storyImageView.image = nil
     }
     
+    /// Configure view
+    /// - Parameter viewModel: View ViewModel
     public func configure(with viewModel: ViewModel) {
         headlineLabel.text = viewModel.headline
         sourceLabel.text = viewModel.source

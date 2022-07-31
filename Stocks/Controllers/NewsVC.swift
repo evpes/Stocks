@@ -8,8 +8,10 @@
 import UIKit
 import SafariServices
 
-class NewsVC: UIViewController {
-
+/// Controller to show news
+final class NewsVC: UIViewController {
+    
+    /// Primary news view
     let tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
@@ -19,14 +21,18 @@ class NewsVC: UIViewController {
         return table
     }()
     
+    /// Collection of models
     private var stories = [NewsStory]()
     
+    /// Instance of a type
     private let type: NewsType
     
+    /// Type of news
     enum NewsType {
         case topStories
         case company(symbol: String)
         
+        /// Title for given type
         var title: String {
             switch self {
             case .topStories:
@@ -39,6 +45,8 @@ class NewsVC: UIViewController {
     
     // MARK: - Init
     
+    /// Create vc with type
+    /// - Parameter type: news type
     init(type: NewsType) {
         self.type = type
         super.init(nibName: nil, bundle: nil)
@@ -63,12 +71,14 @@ class NewsVC: UIViewController {
     
     // MARK: - Private
     
+    /// Sets up tableView
     private func setUpTable() {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
     }
     
+    /// Fetch news models
     private func fetchNews() {
         APICaller.shared.news(for: .topStories) { [weak self] result in
             switch result {
@@ -83,6 +93,8 @@ class NewsVC: UIViewController {
         }
     }
     
+    /// Open a story
+    /// - Parameter url: URL to open
     private func open(url: URL) {
         let vc = SFSafariViewController(url: url)
         present(vc, animated: true)
@@ -90,6 +102,8 @@ class NewsVC: UIViewController {
     
 
 }
+
+// MARK: - TableView
 
 extension NewsVC: UITableViewDelegate, UITableViewDataSource {
     
@@ -132,6 +146,7 @@ extension NewsVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
+    /// Present an alert to show an error occurred when opening story
     private func presentFailedToOpenAlert() {
         let alert = UIAlertController(title: "Unable to open", message: "We were unable to open the article", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
