@@ -32,7 +32,6 @@ final class PersistenceManager {
             userDefaults.set(true, forKey: Constants.onboardedKey)
             setUpDefaults()
         }
-        print("UD \(userDefaults.stringArray(forKey: Constants.watchlistKey))")
         return userDefaults.stringArray(forKey: Constants.watchlistKey) ?? []
     }
     
